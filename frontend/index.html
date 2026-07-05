@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Control Financiero del Hogar</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="hero">
+    <div class="hero__content">
+      <p class="eyebrow">Control Financiero del Hogar</p>
+      <h1>Una base sólida para manejar dinero, deudas y metas familiares.</h1>
+      <p class="lead">
+        MVP modular con Dashboard, Ingresos, Gastos, Cuentas, Tarjetas, Préstamos y Recordatorios.
+      </p>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="panel">
+      <h2>Estado inicial</h2>
+      <div class="grid">
+        <article class="card">
+          <span>Dinero disponible</span>
+          <strong id="available-balance">$0.00</strong>
+        </article>
+        <article class="card">
+          <span>Ingresos del mes</span>
+          <strong id="monthly-income">$0.00</strong>
+        </article>
+        <article class="card">
+          <span>Gastos del mes</span>
+          <strong id="monthly-expenses">$0.00</strong>
+        </article>
+        <article class="card">
+          <span>Ahorro actual</span>
+          <strong id="current-savings">$0.00</strong>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Siguiente paso</h2>
+      <ul class="roadmap">
+        <li>Conectar esta vista con Google Apps Script.</li>
+        <li>Leer datos de Google Sheets con una API JSON.</li>
+        <li>Agregar formularios para ingresos y gastos.</li>
+      </ul>
+    </section>
+  </main>
+
+  <script src="./app.js"></script>
+</body>
+</html>
+
