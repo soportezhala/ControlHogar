@@ -41,6 +41,66 @@
     </section>
 
     <section class="panel">
+      <div class="section-head">
+        <div>
+          <h2>Registrar ingreso</h2>
+          <p class="section-note">Captura un ingreso para guardarlo en Google Sheets.</p>
+        </div>
+      </div>
+
+      <form id="income-form" class="form-grid">
+        <label>
+          <span>Fecha</span>
+          <input type="date" name="fecha" required />
+        </label>
+
+        <label>
+          <span>Concepto</span>
+          <input type="text" name="concepto" placeholder="Ej. Nómina" required />
+        </label>
+
+        <label>
+          <span>Categoría</span>
+          <select name="categoria" required>
+            <option value="">Selecciona una categoría</option>
+            <option value="Nomina">Nómina</option>
+            <option value="Horas extra">Horas extra</option>
+            <option value="Venta">Venta</option>
+            <option value="Reembolso">Reembolso</option>
+            <option value="Otro">Otro</option>
+          </select>
+        </label>
+
+        <label>
+          <span>Cuenta</span>
+          <select name="cuenta" required>
+            <option value="">Selecciona una cuenta</option>
+            <option value="Efectivo">Efectivo</option>
+            <option value="BBVA">BBVA</option>
+            <option value="Banamex">Banamex</option>
+            <option value="Mercado Pago">Mercado Pago</option>
+            <option value="Caja de ahorro">Caja de ahorro</option>
+          </select>
+        </label>
+
+        <label>
+          <span>Monto</span>
+          <input type="number" name="monto" min="0" step="0.01" placeholder="0.00" required />
+        </label>
+
+        <label class="form-span-2">
+          <span>Comentarios</span>
+          <textarea name="comentarios" rows="3" placeholder="Notas opcionales"></textarea>
+        </label>
+
+        <div class="form-actions form-span-2">
+          <button type="submit" class="primary-btn">Guardar ingreso</button>
+          <p id="income-feedback" class="feedback" aria-live="polite"></p>
+        </div>
+      </form>
+    </section>
+
+    <section class="panel">
       <h2>Siguiente paso</h2>
       <ul class="roadmap">
         <li>Conectar esta vista con Google Apps Script.</li>
@@ -53,4 +113,3 @@
   <script src="./app.js"></script>
 </body>
 </html>
-
