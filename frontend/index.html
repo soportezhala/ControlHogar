@@ -48,56 +48,440 @@
         </div>
       </div>
 
-      <form id="income-form" class="form-grid">
-        <label>
-          <span>Fecha</span>
-          <input type="date" name="fecha" required />
-        </label>
+      <div class="income-layout">
+        <aside class="income-aside">
+          <p class="aside-kicker">Flujo rápido</p>
+          <h3>Captura un ingreso en segundos</h3>
+          <p>
+            Este formulario ya guarda en Google Sheets y además registra el movimiento para que
+            después podamos generar reportes sin duplicar datos.
+          </p>
+          <ul class="aside-list">
+            <li>Validación básica antes de enviar</li>
+            <li>Guardado en <strong>Ingresos</strong></li>
+            <li>Registro espejo en <strong>Movimientos</strong></li>
+          </ul>
+        </aside>
 
-        <label>
-          <span>Concepto</span>
-          <input type="text" name="concepto" placeholder="Ej. Nómina" required />
-        </label>
+        <form id="income-form" class="form-grid">
+          <label>
+            <span>Fecha</span>
+            <input type="date" name="fecha" required />
+          </label>
 
-        <label>
-          <span>Categoría</span>
-          <select name="categoria" required>
-            <option value="">Selecciona una categoría</option>
-            <option value="Nomina">Nómina</option>
-            <option value="Horas extra">Horas extra</option>
-            <option value="Venta">Venta</option>
-            <option value="Reembolso">Reembolso</option>
-            <option value="Otro">Otro</option>
-          </select>
-        </label>
+          <label>
+            <span>Concepto</span>
+            <input type="text" name="concepto" placeholder="Ej. Nómina" required />
+          </label>
 
-        <label>
-          <span>Cuenta</span>
-          <select name="cuenta" required>
-            <option value="">Selecciona una cuenta</option>
-            <option value="Efectivo">Efectivo</option>
-            <option value="BBVA">BBVA</option>
-            <option value="Banamex">Banamex</option>
-            <option value="Mercado Pago">Mercado Pago</option>
-            <option value="Caja de ahorro">Caja de ahorro</option>
-          </select>
-        </label>
+          <label>
+            <span>Categoría</span>
+            <select name="categoria" required>
+              <option value="">Cargando categorías...</option>
+            </select>
+          </label>
 
-        <label>
-          <span>Monto</span>
-          <input type="number" name="monto" min="0" step="0.01" placeholder="0.00" required />
-        </label>
+          <label>
+            <span>Cuenta</span>
+            <select name="cuenta" required>
+              <option value="">Cargando cuentas...</option>
+            </select>
+          </label>
 
-        <label class="form-span-2">
-          <span>Comentarios</span>
-          <textarea name="comentarios" rows="3" placeholder="Notas opcionales"></textarea>
-        </label>
+          <label>
+            <span>Monto</span>
+            <input type="number" name="monto" min="0" step="0.01" placeholder="0.00" required />
+          </label>
 
-        <div class="form-actions form-span-2">
-          <button type="submit" class="primary-btn">Guardar ingreso</button>
-          <p id="income-feedback" class="feedback" aria-live="polite"></p>
+          <label class="form-span-2">
+            <span>Comentarios</span>
+            <textarea name="comentarios" rows="3" placeholder="Notas opcionales"></textarea>
+          </label>
+
+          <div class="form-actions form-span-2">
+            <button type="submit" class="primary-btn">Guardar ingreso</button>
+            <p id="income-feedback" class="feedback" aria-live="polite"></p>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-head">
+        <div>
+          <h2>Registrar gasto</h2>
+          <p class="section-note">Registra egresos para mantener actualizado el flujo del hogar.</p>
         </div>
-      </form>
+      </div>
+
+      <div class="income-layout">
+        <aside class="income-aside expense-aside">
+          <p class="aside-kicker">Control de salida</p>
+          <h3>Captura cada gasto con claridad</h3>
+          <p>
+            Cada gasto se guardará en la hoja <strong>Gastos</strong> y también como movimiento
+            para que después podamos construir reportes, presupuestos y alertas.
+          </p>
+          <ul class="aside-list">
+            <li>Permite foto o liga del ticket después</li>
+            <li>Soporta subcategoría y método de pago</li>
+            <li>Sirve como base para presupuestos mensuales</li>
+          </ul>
+        </aside>
+
+        <form id="expense-form" class="form-grid">
+          <label>
+            <span>Fecha</span>
+            <input type="date" name="fecha" required />
+          </label>
+
+          <label>
+            <span>Categoría</span>
+            <select name="expense_categoria" required>
+              <option value="">Cargando categorías...</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Subcategoría</span>
+            <input type="text" name="subcategoria" placeholder="Ej. Despensa" required />
+          </label>
+
+          <label>
+            <span>Método de pago</span>
+            <select name="metodo_pago" required>
+              <option value="">Selecciona un método</option>
+              <option value="Efectivo">Efectivo</option>
+              <option value="Tarjeta de débito">Tarjeta de débito</option>
+              <option value="Tarjeta de crédito">Tarjeta de crédito</option>
+              <option value="Transferencia">Transferencia</option>
+              <option value="Mercado Pago">Mercado Pago</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Cuenta</span>
+            <select name="expense_cuenta" required>
+              <option value="">Cargando cuentas...</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Monto</span>
+            <input type="number" name="monto" min="0" step="0.01" placeholder="0.00" required />
+          </label>
+
+          <label class="form-span-2">
+            <span>Comentarios</span>
+            <textarea name="comentarios" rows="3" placeholder="Notas opcionales"></textarea>
+          </label>
+
+          <div class="form-actions form-span-2">
+            <button type="submit" class="primary-btn expense-btn">Guardar gasto</button>
+            <p id="expense-feedback" class="feedback" aria-live="polite"></p>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-head">
+        <div>
+          <h2>Registrar cuenta</h2>
+          <p class="section-note">Da de alta una cuenta para centralizar movimientos y saldos.</p>
+        </div>
+      </div>
+
+      <div class="income-layout">
+        <aside class="income-aside account-aside">
+          <p class="aside-kicker">Base financiera</p>
+          <h3>Centraliza todas tus cuentas</h3>
+          <p>
+            Aquí iremos construyendo la base del saldo real. Cada cuenta nueva permitirá después
+            asociar ingresos, gastos y transferencias con una referencia clara.
+          </p>
+          <ul class="aside-list">
+            <li>Control de saldo inicial</li>
+            <li>Clasificación por tipo de cuenta</li>
+            <li>Preparado para conciliación futura</li>
+          </ul>
+        </aside>
+
+        <form id="account-form" class="form-grid">
+          <label>
+            <span>Nombre</span>
+            <input type="text" name="nombre" placeholder="Ej. BBVA Nómina" required />
+          </label>
+
+          <label>
+            <span>Tipo</span>
+            <select name="tipo" required>
+              <option value="">Selecciona un tipo</option>
+              <option value="Efectivo">Efectivo</option>
+              <option value="Banco">Banco</option>
+              <option value="Digital">Digital</option>
+              <option value="Ahorro">Ahorro</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Saldo inicial</span>
+            <input type="number" name="saldo_inicial" min="0" step="0.01" placeholder="0.00" required />
+          </label>
+
+          <label>
+            <span>Moneda</span>
+            <select name="moneda" required>
+              <option value="MXN">MXN</option>
+              <option value="USD">USD</option>
+            </select>
+          </label>
+
+          <label class="form-span-2">
+            <span>Comentarios</span>
+            <textarea name="comentarios" rows="3" placeholder="Notas opcionales"></textarea>
+          </label>
+
+          <div class="form-actions form-span-2">
+            <button type="submit" class="primary-btn account-btn">Guardar cuenta</button>
+            <p id="account-feedback" class="feedback" aria-live="polite"></p>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-head">
+        <div>
+          <h2>Tarjetas de crédito</h2>
+          <p class="section-note">Visualiza el uso, límite y estado de cada tarjeta de forma clara.</p>
+        </div>
+      </div>
+
+      <div class="cards-hero">
+        <div class="cards-hero__copy">
+          <p class="aside-kicker">Control amigable</p>
+          <h3>Tarjetas visibles, entendibles y sin ruido</h3>
+          <p>
+            Cada tarjeta se mostrará con su límite, saldo, disponible y porcentaje de uso.
+            Así tendrás una lectura rápida sin entrar a hojas ni fórmulas.
+          </p>
+        </div>
+        <div id="cards-summary" class="cards-summary">
+          <div class="summary-pill">
+            <span>Tarjetas</span>
+            <strong id="cards-count">0</strong>
+          </div>
+          <div class="summary-pill">
+            <span>Uso promedio</span>
+            <strong id="cards-average-utilization">0%</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="cards-grid-wrap">
+        <div id="cards-grid" class="cards-grid">
+          <article class="credit-card credit-card--empty">
+            <div class="credit-card__top">
+              <div>
+                <span>Sin tarjetas aún</span>
+                <strong>Agrega tu primera tarjeta</strong>
+              </div>
+            </div>
+            <p>Cuando registres una tarjeta, aparecerá aquí con su nivel de uso.</p>
+          </article>
+        </div>
+      </div>
+
+      <div class="income-layout cards-form-layout">
+        <aside class="income-aside cards-aside">
+          <p class="aside-kicker">Lectura rápida</p>
+          <h3>Agrega y controla tus tarjetas</h3>
+          <p>
+            Aquí podrás guardar los datos principales y después usar esta base para alertas,
+            pagos mínimos y fechas límite.
+          </p>
+          <ul class="aside-list">
+            <li>Límite y saldo actual</li>
+            <li>Pago mínimo y no intereses</li>
+            <li>Fechas de corte y vencimiento</li>
+          </ul>
+        </aside>
+
+        <form id="card-form" class="form-grid">
+          <label>
+            <span>Banco</span>
+            <input type="text" name="banco" placeholder="Ej. BBVA" required />
+          </label>
+
+          <label>
+            <span>Nombre</span>
+            <input type="text" name="nombre" placeholder="Ej. BBVA Azul" required />
+          </label>
+
+          <label>
+            <span>Límite</span>
+            <input type="number" name="limite" min="0" step="0.01" placeholder="0.00" required />
+          </label>
+
+          <label>
+            <span>Saldo actual</span>
+            <input type="number" name="saldo_actual" min="0" step="0.01" placeholder="0.00" required />
+          </label>
+
+          <label>
+            <span>Pago mínimo</span>
+            <input type="number" name="pago_minimo" min="0" step="0.01" placeholder="0.00" required />
+          </label>
+
+          <label>
+            <span>Pago no intereses</span>
+            <input type="number" name="pago_no_intereses" min="0" step="0.01" placeholder="0.00" required />
+          </label>
+
+          <label>
+            <span>Fecha de corte</span>
+            <input type="date" name="fecha_corte" required />
+          </label>
+
+          <label>
+            <span>Fecha límite</span>
+            <input type="date" name="fecha_limite" required />
+          </label>
+
+          <label>
+            <span>Interés anual (%)</span>
+            <input type="number" name="interes_anual" min="0" step="0.01" placeholder="0.00" required />
+          </label>
+
+          <label class="form-span-2">
+            <span>Comentarios</span>
+            <textarea name="comentarios" rows="3" placeholder="Notas opcionales"></textarea>
+          </label>
+
+          <div class="form-actions form-span-2">
+            <button type="submit" class="primary-btn card-btn">Guardar tarjeta</button>
+            <p id="card-feedback" class="feedback" aria-live="polite"></p>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-head">
+        <div>
+          <h2>Préstamos</h2>
+          <p class="section-note">Controla deudas, pagos mensuales y avance real sin perder claridad.</p>
+        </div>
+      </div>
+
+      <div class="loans-hero">
+        <div class="loans-hero__copy">
+          <p class="aside-kicker">Deuda visible</p>
+          <h3>Verás cada préstamo como una ficha clara y amable</h3>
+          <p>
+            El objetivo es que puedas identificar lo pendiente, el pago mensual y el progreso
+            de forma rápida, sin tener que descifrar columnas en una hoja.
+          </p>
+        </div>
+        <div id="loans-summary" class="cards-summary">
+          <div class="summary-pill">
+            <span>Préstamos</span>
+            <strong id="loans-count">0</strong>
+          </div>
+          <div class="summary-pill">
+            <span>Saldo total</span>
+            <strong id="loans-total-balance">$0.00</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="cards-grid-wrap">
+        <div id="loans-grid" class="cards-grid">
+          <article class="loan-card loan-card--empty">
+            <div class="loan-card__top">
+              <div>
+                <span>Sin préstamos aún</span>
+                <strong>Agrega tu primer préstamo</strong>
+              </div>
+            </div>
+            <p>Cuando registres un préstamo, aparecerá aquí con su avance y saldo.</p>
+          </article>
+        </div>
+      </div>
+
+      <div class="income-layout loans-form-layout">
+        <aside class="income-aside loans-aside">
+          <p class="aside-kicker">Seguimiento</p>
+          <h3>Registra préstamos de manera simple</h3>
+          <p>
+            Guarda el dato principal del préstamo y deja lista la base para alertas, calendarios
+            y recordatorios de pago.
+          </p>
+          <ul class="aside-list">
+            <li>Monto original y saldo actual</li>
+            <li>Pago mensual e interés</li>
+            <li>Fecha de inicio y vencimiento</li>
+          </ul>
+        </aside>
+
+        <form id="loan-form" class="form-grid">
+          <label>
+            <span>Prestamista</span>
+            <input type="text" name="prestamista" placeholder="Ej. Banco" required />
+          </label>
+
+          <label>
+            <span>Concepto</span>
+            <input type="text" name="concepto" placeholder="Ej. Auto" required />
+          </label>
+
+          <label>
+            <span>Monto original</span>
+            <input type="number" name="monto_original" min="0" step="0.01" placeholder="0.00" required />
+          </label>
+
+          <label>
+            <span>Saldo actual</span>
+            <input type="number" name="saldo_actual" min="0" step="0.01" placeholder="0.00" required />
+          </label>
+
+          <label>
+            <span>Pago mensual</span>
+            <input type="number" name="pago_mensual" min="0" step="0.01" placeholder="0.00" required />
+          </label>
+
+          <label>
+            <span>Interés anual (%)</span>
+            <input type="number" name="interes_anual" min="0" step="0.01" placeholder="0.00" required />
+          </label>
+
+          <label>
+            <span>Fecha de inicio</span>
+            <input type="date" name="fecha_inicio" required />
+          </label>
+
+          <label>
+            <span>Fecha límite</span>
+            <input type="date" name="fecha_limite" required />
+          </label>
+
+          <label>
+            <span>Pagos restantes</span>
+            <input type="number" name="pagos_restantes" min="0" step="1" placeholder="0" required />
+          </label>
+
+          <label class="form-span-2">
+            <span>Comentarios</span>
+            <textarea name="comentarios" rows="3" placeholder="Notas opcionales"></textarea>
+          </label>
+
+          <div class="form-actions form-span-2">
+            <button type="submit" class="primary-btn loan-btn">Guardar préstamo</button>
+            <p id="loan-feedback" class="feedback" aria-live="polite"></p>
+          </div>
+        </form>
+      </div>
     </section>
 
     <section class="panel">
@@ -106,6 +490,18 @@
         <li>Conectar esta vista con Google Apps Script.</li>
         <li>Leer datos de Google Sheets con una API JSON.</li>
         <li>Agregar formularios para ingresos y gastos.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <div class="section-head">
+        <div>
+          <h2>Actividad reciente</h2>
+          <p class="section-note">Últimos movimientos registrados en el sistema.</p>
+        </div>
+      </div>
+      <ul id="recent-movements" class="activity-list">
+        <li class="activity-empty">Sin actividad todavía.</li>
       </ul>
     </section>
   </main>
