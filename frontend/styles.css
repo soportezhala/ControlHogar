@@ -86,6 +86,61 @@ h1 {
   color: var(--muted);
 }
 
+.income-layout {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.9fr) minmax(0, 1.4fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.income-aside {
+  border-radius: 20px;
+  padding: 24px;
+  background:
+    linear-gradient(180deg, rgba(125, 211, 252, 0.12), rgba(17, 28, 54, 0.92)),
+    var(--panel);
+  border: 1px solid rgba(125, 211, 252, 0.16);
+}
+
+.expense-aside {
+  background:
+    linear-gradient(180deg, rgba(52, 211, 153, 0.12), rgba(17, 28, 54, 0.92)),
+    var(--panel);
+  border-color: rgba(52, 211, 153, 0.18);
+}
+
+.account-aside {
+  background:
+    linear-gradient(180deg, rgba(255, 204, 112, 0.12), rgba(17, 28, 54, 0.92)),
+    var(--panel);
+  border-color: rgba(255, 204, 112, 0.18);
+}
+
+.aside-kicker {
+  margin: 0 0 10px;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.78rem;
+}
+
+.income-aside h3 {
+  margin: 0 0 10px;
+  font-size: 1.25rem;
+}
+
+.income-aside p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.aside-list {
+  margin: 16px 0 0;
+  padding-left: 18px;
+  color: var(--text);
+  line-height: 1.8;
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -116,10 +171,336 @@ h1 {
   line-height: 1.8;
 }
 
+.activity-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.activity-item,
+.activity-empty {
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px 18px;
+  background: rgba(15, 27, 54, 0.72);
+}
+
+.activity-item strong {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.activity-item span {
+  color: var(--muted);
+}
+
+.activity-kind {
+  display: inline-block;
+  margin-top: 8px;
+  color: var(--accent);
+  font-size: 0.88rem;
+}
+
+.cards-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 20px;
+  align-items: stretch;
+  margin-bottom: 20px;
+}
+
+.cards-hero__copy {
+  border-radius: 20px;
+  padding: 24px;
+  background:
+    linear-gradient(180deg, rgba(139, 92, 246, 0.14), rgba(17, 28, 54, 0.92)),
+    var(--panel);
+  border: 1px solid rgba(139, 92, 246, 0.18);
+}
+
+.cards-hero__copy h3 {
+  margin: 0 0 10px;
+  font-size: 1.35rem;
+}
+
+.cards-summary {
+  display: grid;
+  gap: 12px;
+  min-width: 220px;
+}
+
+.summary-pill {
+  border-radius: 18px;
+  padding: 16px 18px;
+  background: rgba(15, 27, 54, 0.72);
+  border: 1px solid var(--border);
+}
+
+.summary-pill span {
+  display: block;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.summary-pill strong {
+  font-size: 1.6rem;
+}
+
+.cards-grid-wrap {
+  margin-bottom: 20px;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.credit-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  padding: 22px;
+  background:
+    radial-gradient(circle at top right, rgba(255, 255, 255, 0.16), transparent 30%),
+    linear-gradient(160deg, rgba(139, 92, 246, 0.95), rgba(15, 23, 42, 0.96));
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #f8f7ff;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.22);
+}
+
+.credit-card::after {
+  content: "";
+  position: absolute;
+  inset: auto -30px -30px auto;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.credit-card__top {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.credit-card__bank {
+  color: rgba(248, 247, 255, 0.75);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.credit-card__name {
+  display: block;
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-top: 6px;
+}
+
+.credit-card__meta {
+  display: grid;
+  gap: 10px;
+  margin: 18px 0;
+}
+
+.credit-card__row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: rgba(248, 247, 255, 0.88);
+}
+
+.credit-card__row span:first-child {
+  color: rgba(248, 247, 255, 0.68);
+}
+
+.credit-card__bar {
+  height: 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+  overflow: hidden;
+  margin: 16px 0 10px;
+}
+
+.credit-card__bar > div {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #7dd3fc, #34d399);
+}
+
+.credit-card__foot {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: rgba(248, 247, 255, 0.85);
+  font-size: 0.92rem;
+}
+
+.credit-card--empty {
+  background:
+    radial-gradient(circle at top right, rgba(255, 255, 255, 0.08), transparent 25%),
+    linear-gradient(160deg, rgba(30, 41, 59, 0.96), rgba(15, 23, 42, 0.96));
+  color: var(--text);
+}
+
+.credit-card--empty p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.cards-form-layout {
+  margin-top: 12px;
+}
+
+.cards-aside {
+  background:
+    linear-gradient(180deg, rgba(125, 211, 252, 0.1), rgba(17, 28, 54, 0.92)),
+    var(--panel);
+  border-color: rgba(125, 211, 252, 0.18);
+}
+
+.loans-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 20px;
+  align-items: stretch;
+  margin-bottom: 20px;
+}
+
+.loans-hero__copy {
+  border-radius: 20px;
+  padding: 24px;
+  background:
+    linear-gradient(180deg, rgba(251, 146, 60, 0.14), rgba(17, 28, 54, 0.92)),
+    var(--panel);
+  border: 1px solid rgba(251, 146, 60, 0.18);
+}
+
+.loans-hero__copy h3 {
+  margin: 0 0 10px;
+  font-size: 1.35rem;
+}
+
+.loans-aside {
+  background:
+    linear-gradient(180deg, rgba(251, 146, 60, 0.1), rgba(17, 28, 54, 0.92)),
+    var(--panel);
+  border-color: rgba(251, 146, 60, 0.18);
+}
+
+.loans-form-layout {
+  margin-top: 12px;
+}
+
+.loan-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  padding: 22px;
+  background:
+    radial-gradient(circle at top right, rgba(255, 255, 255, 0.16), transparent 30%),
+    linear-gradient(160deg, rgba(251, 146, 60, 0.94), rgba(30, 41, 59, 0.96));
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #fff8f0;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.22);
+}
+
+.loan-card::after {
+  content: "";
+  position: absolute;
+  inset: auto -30px -30px auto;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.loan-card__top {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.loan-card__name {
+  display: block;
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-top: 6px;
+}
+
+.loan-card__bank {
+  color: rgba(255, 248, 240, 0.75);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.loan-card__meta {
+  display: grid;
+  gap: 10px;
+  margin: 18px 0;
+}
+
+.loan-card__row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: rgba(255, 248, 240, 0.9);
+}
+
+.loan-card__row span:first-child {
+  color: rgba(255, 248, 240, 0.68);
+}
+
+.loan-card__bar {
+  height: 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+  overflow: hidden;
+  margin: 16px 0 10px;
+}
+
+.loan-card__bar > div {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #ffd8a8, #fb923c);
+}
+
+.loan-card__foot {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: rgba(255, 248, 240, 0.85);
+  font-size: 0.92rem;
+}
+
+.loan-card--empty {
+  background:
+    radial-gradient(circle at top right, rgba(255, 255, 255, 0.08), transparent 25%),
+    linear-gradient(160deg, rgba(30, 41, 59, 0.96), rgba(15, 23, 42, 0.96));
+  color: var(--text);
+}
+
+.loan-card--empty p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
 .form-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
+  padding: 24px;
+  border-radius: 20px;
+  background: rgba(15, 27, 54, 0.72);
+  border: 1px solid var(--border);
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.18);
 }
 
 .form-grid label {
@@ -137,7 +518,7 @@ h1 {
 .form-grid textarea {
   width: 100%;
   border: 1px solid var(--border);
-  background: #0f1b36;
+  background: rgba(8, 16, 33, 0.92);
   color: var(--text);
   border-radius: 14px;
   padding: 14px 16px;
@@ -153,6 +534,7 @@ h1 {
 .form-grid textarea:focus {
   outline: 2px solid rgba(125, 211, 252, 0.45);
   outline-offset: 2px;
+  border-color: transparent;
 }
 
 .form-span-2 {
@@ -174,10 +556,23 @@ h1 {
   font-weight: 700;
   padding: 14px 20px;
   cursor: pointer;
+  box-shadow: 0 12px 28px rgba(52, 211, 153, 0.16);
 }
 
 .primary-btn:hover {
   filter: brightness(1.05);
+}
+
+.expense-btn {
+  background: linear-gradient(135deg, #9ef3ce, #34d399);
+}
+
+.account-btn {
+  background: linear-gradient(135deg, #ffe29a, #ffcc70);
+}
+
+.card-btn {
+  background: linear-gradient(135deg, #c7b6ff, #8b5cf6);
 }
 
 .primary-btn:disabled {
@@ -199,6 +594,18 @@ h1 {
 }
 
 @media (max-width: 720px) {
+  .cards-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .loans-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .income-layout {
+    grid-template-columns: 1fr;
+  }
+
   .form-grid {
     grid-template-columns: 1fr;
   }
