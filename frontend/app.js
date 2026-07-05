@@ -1,4 +1,6 @@
-const apiBaseUrl = "";
+// Pega aquí la URL publicada de tu Web App de Apps Script.
+// Ejemplo: "https://script.google.com/macros/s/XXXX/exec"
+const apiBaseUrl = "https://script.google.com/macros/s/AKfycbzuLmVvn933jcf_GFdJcGs5PCVcbAt5xjgiLJPkXN-WHi8GmbLnxvj_2zojvs5pwITa/exec";
 
 async function loadDashboard() {
   const fallback = {
@@ -14,7 +16,7 @@ async function loadDashboard() {
       return;
     }
 
-    const response = await fetch(`${apiBaseUrl}/dashboard`);
+    const response = await fetch(`${apiBaseUrl}?route=dashboard`);
     if (!response.ok) throw new Error("No se pudo cargar el dashboard");
     const data = await response.json();
     renderDashboard(data);
@@ -38,4 +40,3 @@ function renderDashboard(data) {
 }
 
 loadDashboard();
-
