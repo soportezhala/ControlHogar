@@ -1,6 +1,6 @@
 // Pega aquí la URL publicada de tu Web App de Apps Script.
 // Ejemplo: "https://script.google.com/macros/s/XXXX/exec"
-const apiBaseUrl = "";
+const apiBaseUrl = "https://script.google.com/macros/s/AKfycbzuLmVvn933jcf_GFdJcGs5PCVcbAt5xjgiLJPkXN-WHi8GmbLnxvj_2zojvs5pwITa/exec";
 
 async function loadDashboard() {
   const fallback = {
