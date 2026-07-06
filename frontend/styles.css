@@ -141,6 +141,21 @@ h1 {
   line-height: 1.8;
 }
 
+.aside-note {
+  margin: 16px 0 0;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: rgba(8, 16, 33, 0.45);
+  border: 1px solid rgba(125, 211, 252, 0.16);
+  color: var(--muted);
+}
+
+.field-hint {
+  color: var(--muted);
+  font-size: 0.82rem;
+  margin-top: 6px;
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
