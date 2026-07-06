@@ -27,6 +27,8 @@ async function loadDashboard() {
     recentMovements: [],
     cards: [],
     loans: [],
+    reminders: [],
+    remindersTodayCount: 0,
   };
 
   try {
@@ -383,6 +385,73 @@ function initLoanForm() {
   });
 }
 
+function initReminderForm() {
+  const form = document.getElementById("reminder-form");
+  const feedback = document.getElementById("reminder-feedback");
+  if (!form || !feedback) return;
+
+  const submitButton = form.querySelector('button[type="submit"]');
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    if (!apiBaseUrl) {
+      setFeedback(feedback, "Configura la URL del Apps Script para guardar recordatorios.", "error");
+      return;
+    }
+
+    const formData = new FormData(form);
+    const payload = {
+      titulo: String(formData.get("titulo") || "").trim(),
+      tipo: String(formData.get("tipo") || "").trim(),
+      fecha_evento: String(formData.get("fecha_evento") || "").trim(),
+      dias_antes: Number(formData.get("dias_antes") || 0),
+      canal: String(formData.get("canal") || "").trim(),
+      estado: String(formData.get("estado") || "").trim(),
+      descripcion: String(formData.get("descripcion") || "").trim(),
+    };
+
+    if (
+      !payload.titulo ||
+      !payload.tipo ||
+      !payload.fecha_evento ||
+      Number.isNaN(payload.dias_antes) ||
+      !payload.canal ||
+      !payload.estado
+    ) {
+      setFeedback(feedback, "Completa todos los campos obligatorios.", "error");
+      return;
+    }
+
+    submitButton.disabled = true;
+    setFeedback(feedback, "Guardando recordatorio...", "");
+
+    try {
+      const response = await fetch(`${apiBaseUrl}?route=recordatorios`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.ok) {
+        throw new Error(result.error || "No se pudo guardar el recordatorio");
+      }
+
+      form.reset();
+      setFeedback(feedback, "Recordatorio guardado correctamente.", "success");
+      await loadDashboard();
+    } catch (error) {
+      setFeedback(feedback, error.message || "Hubo un error al guardar el recordatorio.", "error");
+    } finally {
+      submitButton.disabled = false;
+    }
+  });
+}
+
 function populateSelect(name, items, placeholder) {
   const select = document.querySelector(`select[name="${name}"]`);
   if (!select) return;
@@ -435,6 +504,7 @@ function renderDashboard(data) {
   renderRecentMovements(data.recentMovements || []);
   renderCards(data.cards || []);
   renderLoans(data.loans || []);
+  renderReminders(data.reminders || [], data.remindersTodayCount || 0);
 }
 
 function renderRecentMovements(items) {
@@ -632,6 +702,87 @@ function renderLoans(items) {
     .join("");
 }
 
+function renderReminders(items, todayCount) {
+  const grid = document.getElementById("reminders-grid");
+  const count = document.getElementById("reminders-count");
+  const today = document.getElementById("reminders-today-count");
+  if (!grid || !count || !today) return;
+
+  if (!Array.isArray(items) || items.length === 0) {
+    count.textContent = "0";
+    today.textContent = String(Number(todayCount || 0));
+    grid.innerHTML = `
+      <article class="reminder-card reminder-card--empty">
+        <div class="reminder-card__top">
+          <div>
+            <span>Sin recordatorios aún</span>
+            <strong>Agrega uno para empezar</strong>
+          </div>
+        </div>
+        <p>Cuando registres un recordatorio, aparecerá aquí con su fecha y canal.</p>
+      </article>
+    `;
+    return;
+  }
+
+  const sorted = items
+    .slice()
+    .sort((a, b) => Number(a.days_until_alert ?? a.daysUntilAlert ?? 9999) - Number(b.days_until_alert ?? b.daysUntilAlert ?? 9999));
+
+  const alertsToday = sorted.filter((item) => Number(item.days_until_alert ?? item.daysUntilAlert ?? 9999) === 0).length;
+
+  count.textContent = String(sorted.length);
+  today.textContent = String(alertsToday || Number(todayCount || 0));
+
+  grid.innerHTML = sorted
+    .map((item) => {
+      const title = escapeHtml(item.titulo || item.title || "");
+      const type = escapeHtml(item.tipo || "");
+      const date = escapeHtml(item.fecha_evento || "");
+      const channel = escapeHtml(item.canal || "");
+      const status = escapeHtml(item.estado || "");
+      const description = escapeHtml(item.descripcion || "");
+      const daysAlert = Number(item.days_until_alert ?? item.daysUntilAlert ?? 0);
+      const daysEvent = Number(item.days_until_event ?? item.daysUntilEvent ?? 0);
+      const urgency = item.urgency || (daysAlert < 0 ? "vencido" : daysAlert === 0 ? "hoy" : daysAlert === 1 ? "mañana" : "próximo");
+
+      return `
+        <article class="reminder-card">
+          <div class="reminder-card__top">
+            <div>
+              <div class="reminder-card__type">${type}</div>
+              <strong class="reminder-card__name">${title}</strong>
+            </div>
+            <div>${escapeHtml(String(urgency))}</div>
+          </div>
+          <div class="reminder-card__meta">
+            <div class="reminder-card__row">
+              <span>Fecha</span>
+              <strong>${date}</strong>
+            </div>
+            <div class="reminder-card__row">
+              <span>Estado</span>
+              <strong>${status}</strong>
+            </div>
+            <div class="reminder-card__row">
+              <span>Canal</span>
+              <strong>${channel}</strong>
+            </div>
+            <div class="reminder-card__row">
+              <span>Avance</span>
+              <strong>${daysAlert} días para aviso</strong>
+            </div>
+          </div>
+          <div class="reminder-card__foot">
+            <span>${description || "Sin notas adicionales"}</span>
+            <span>${daysEvent} días para evento</span>
+          </div>
+        </article>
+      `;
+    })
+    .join("");
+}
+
 function escapeHtml(value) {
   return String(value)
     .replaceAll("&", "&amp;")
@@ -655,5 +806,6 @@ initExpenseForm();
 initAccountForm();
 initCardForm();
 initLoanForm();
+initReminderForm();
 loadBootstrapData();
 loadDashboard();
