@@ -7,6 +7,7 @@ const defaultCategories = [
   { value: "Horas extra", label: "Horas extra" },
   { value: "Venta", label: "Venta" },
   { value: "Reembolso", label: "Reembolso" },
+  { value: "Plataformas", label: "Plataformas / Clickworker" },
   { value: "Otro", label: "Otro" },
 ];
 
