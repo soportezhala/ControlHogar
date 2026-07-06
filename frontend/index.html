@@ -485,6 +485,123 @@
     </section>
 
     <section class="panel">
+      <div class="section-head">
+        <div>
+          <h2>Recordatorios</h2>
+          <p class="section-note">Mantén visibles los pagos y fechas importantes sin depender de la memoria.</p>
+        </div>
+      </div>
+
+      <div class="reminders-hero">
+        <div class="reminders-hero__copy">
+          <p class="aside-kicker">Alertas útiles</p>
+          <h3>Los recordatorios vivirán al frente del sistema</h3>
+          <p>
+            Esta vista mostrará lo que vence pronto y te permitirá registrar recordatorios manuales
+            mientras después activamos el envío por correo o WhatsApp.
+          </p>
+        </div>
+        <div id="reminders-summary" class="cards-summary">
+          <div class="summary-pill">
+            <span>Próximos</span>
+            <strong id="reminders-count">0</strong>
+          </div>
+          <div class="summary-pill">
+            <span>Hoy</span>
+            <strong id="reminders-today-count">0</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="cards-grid-wrap">
+        <div id="reminders-grid" class="reminders-grid">
+          <article class="reminder-card reminder-card--empty">
+            <div class="reminder-card__top">
+              <div>
+                <span>Sin recordatorios aún</span>
+                <strong>Agrega uno para empezar</strong>
+              </div>
+            </div>
+            <p>Cuando registres un recordatorio, aparecerá aquí con su fecha y canal.</p>
+          </article>
+        </div>
+      </div>
+
+      <div class="income-layout reminders-form-layout">
+        <aside class="income-aside reminders-aside">
+          <p class="aside-kicker">Seguimiento</p>
+          <h3>Agenda pagos y vencimientos</h3>
+          <p>
+            Usa esta sección para dejar documentado cualquier evento que necesite aviso: tarjeta,
+            préstamo, servicio, colegiatura o cualquier fecha crítica.
+          </p>
+          <ul class="aside-list">
+            <li>Fecha del evento</li>
+            <li>Días de anticipación</li>
+            <li>Correo, WhatsApp o interno</li>
+          </ul>
+        </aside>
+
+        <form id="reminder-form" class="form-grid">
+          <label>
+            <span>Título</span>
+            <input type="text" name="titulo" placeholder="Ej. Pago BBVA" required />
+          </label>
+
+          <label>
+            <span>Tipo</span>
+            <select name="tipo" required>
+              <option value="">Selecciona un tipo</option>
+              <option value="tarjeta">Tarjeta</option>
+              <option value="prestamo">Préstamo</option>
+              <option value="servicio">Servicio</option>
+              <option value="otro">Otro</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Fecha del evento</span>
+            <input type="date" name="fecha_evento" required />
+          </label>
+
+          <label>
+            <span>Días antes</span>
+            <input type="number" name="dias_antes" min="0" step="1" placeholder="5" required />
+          </label>
+
+          <label>
+            <span>Canal</span>
+            <select name="canal" required>
+              <option value="">Selecciona un canal</option>
+              <option value="interno">Interno</option>
+              <option value="correo">Correo</option>
+              <option value="whatsapp">WhatsApp</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Estado</span>
+            <select name="estado" required>
+              <option value="pendiente">Pendiente</option>
+              <option value="en_proceso">En proceso</option>
+              <option value="hecho">Hecho</option>
+            </select>
+          </label>
+
+          <label class="form-span-2">
+            <span>Descripción</span>
+            <textarea name="descripcion" rows="3" placeholder="Notas opcionales"></textarea>
+          </label>
+
+          <div class="form-actions form-span-2">
+            <button type="submit" class="primary-btn reminder-btn">Guardar recordatorio</button>
+            <p id="reminder-feedback" class="feedback" aria-live="polite"></p>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="panel">
       <h2>Siguiente paso</h2>
       <ul class="roadmap">
         <li>Conectar esta vista con Google Apps Script.</li>
