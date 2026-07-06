@@ -72,6 +72,28 @@ async function loadBootstrapData() {
   }
 }
 
+async function postApiJson(route, payload) {
+  const response = await fetch(`${apiBaseUrl}?route=${route}`, {
+    method: "POST",
+    body: JSON.stringify(payload),
+  });
+
+  const rawText = await response.text();
+  let result = null;
+
+  try {
+    result = rawText ? JSON.parse(rawText) : {};
+  } catch {
+    throw new Error(rawText || "La respuesta del servidor no fue válida.");
+  }
+
+  if (!response.ok || !result.ok) {
+    throw new Error(result.error || "No se pudo completar la solicitud.");
+  }
+
+  return result;
+}
+
 function initIncomeForm() {
   const form = document.getElementById("income-form");
   const feedback = document.getElementById("income-feedback");
@@ -104,20 +126,7 @@ function initIncomeForm() {
     setFeedback(feedback, "Guardando ingreso...", "");
 
     try {
-      const response = await fetch(`${apiBaseUrl}?route=ingresos`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
-
-      const result = await response.json();
-
-      if (!response.ok || !result.ok) {
-        throw new Error(result.error || "No se pudo guardar el ingreso");
-      }
-
+      await postApiJson("ingresos", payload);
       form.reset();
       setFeedback(feedback, "Ingreso guardado correctamente.", "success");
       await loadDashboard();
@@ -162,20 +171,7 @@ function initExpenseForm() {
     setFeedback(feedback, "Guardando gasto...", "");
 
     try {
-      const response = await fetch(`${apiBaseUrl}?route=gastos`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
-
-      const result = await response.json();
-
-      if (!response.ok || !result.ok) {
-        throw new Error(result.error || "No se pudo guardar el gasto");
-      }
-
+      await postApiJson("gastos", payload);
       form.reset();
       setFeedback(feedback, "Gasto guardado correctamente.", "success");
       await loadDashboard();
@@ -218,20 +214,7 @@ function initAccountForm() {
     setFeedback(feedback, "Guardando cuenta...", "");
 
     try {
-      const response = await fetch(`${apiBaseUrl}?route=cuentas`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
-
-      const result = await response.json();
-
-      if (!response.ok || !result.ok) {
-        throw new Error(result.error || "No se pudo guardar la cuenta");
-      }
-
+      await postApiJson("cuentas", payload);
       form.reset();
       setFeedback(feedback, "Cuenta guardada correctamente.", "success");
       await loadBootstrapData();
@@ -289,20 +272,7 @@ function initCardForm() {
     setFeedback(feedback, "Guardando tarjeta...", "");
 
     try {
-      const response = await fetch(`${apiBaseUrl}?route=tarjetas`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
-
-      const result = await response.json();
-
-      if (!response.ok || !result.ok) {
-        throw new Error(result.error || "No se pudo guardar la tarjeta");
-      }
-
+      await postApiJson("tarjetas", payload);
       form.reset();
       setFeedback(feedback, "Tarjeta guardada correctamente.", "success");
       await loadDashboard();
@@ -360,20 +330,7 @@ function initLoanForm() {
     setFeedback(feedback, "Guardando préstamo...", "");
 
     try {
-      const response = await fetch(`${apiBaseUrl}?route=prestamos`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
-
-      const result = await response.json();
-
-      if (!response.ok || !result.ok) {
-        throw new Error(result.error || "No se pudo guardar el préstamo");
-      }
-
+      await postApiJson("prestamos", payload);
       form.reset();
       setFeedback(feedback, "Préstamo guardado correctamente.", "success");
       await loadDashboard();
@@ -427,20 +384,7 @@ function initReminderForm() {
     setFeedback(feedback, "Guardando recordatorio...", "");
 
     try {
-      const response = await fetch(`${apiBaseUrl}?route=recordatorios`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
-
-      const result = await response.json();
-
-      if (!response.ok || !result.ok) {
-        throw new Error(result.error || "No se pudo guardar el recordatorio");
-      }
-
+      await postApiJson("recordatorios", payload);
       form.reset();
       setFeedback(feedback, "Recordatorio guardado correctamente.", "success");
       await loadDashboard();
